@@ -3,8 +3,12 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
+#include <filesystem>
+
 using namespace std;
 
+namespace PRUtils::Data{
+#pragma region BMP Header
 // Pack the BMP struct to save memory
 #pragma pack(push, 1)
 struct BMPHeader {
@@ -26,7 +30,9 @@ struct BMPHeader {
     uint32_t importantColors;   // Number of important colors (0 for BI_RGB)
 };
 #pragma pack(pop)
+#pragma endregion
 
+#pragma region WriteBMP
 void writeBMP(const char* input, int width, const char* output) {
     // Get file location and interpret into readable data.
     ifstream dataInit(input, ios::binary);
@@ -98,4 +104,11 @@ void writeBMP(const char* input, int width, const char* output) {
 
     outFile.close();
     std::cout << "BMP file " << output << " written successfully." << std::endl;
+}
+#pragma endregion
+
+    SearchForBMP(std::filesystem::path path){
+        const char[2] = {'B','M'};
+        
+    }
 }
